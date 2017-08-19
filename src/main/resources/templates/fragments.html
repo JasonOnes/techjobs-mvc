@@ -27,5 +27,20 @@
         </div>
     </div>
 
+    <div th:fragment="display-table">
+    <h1 th:if="${jobs}"  th:text="|${jobs.size()} Result(s)|">Result(s)</h1>
+    <!--note how to get jobs.size with Results same line with if conditional and || pipes-->
+    <table class="job-listing" th:each="job : ${jobs}">
+
+        <tr th:each="item : ${job}">
+
+            <td th:text="${#strings.capitalizeWords(item.key)}"></td>
+            <td th:text="${item.value}"></td>
+        </tr>
+
+    </table>
+</div>
+
+
 </body>
 </html>

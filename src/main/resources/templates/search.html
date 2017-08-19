@@ -20,7 +20,16 @@
                         name="searchType"
                         th:id="${column.key}"
                         th:value="${column.key}"
-                        th:checked="${column.key == 'all'}"/>
+                        th:checked="${column.key == aSearchType}"/>
+
+                        <!--th:if="${aSearchType != null}"-->
+                        <!--th:checked="${column.key == aSearchType}"-->
+                        <!--th:unless="${aSearchType}"-->
+                        <!--th:checked="${column.key == 'all'}"/>-->
+
+                        <!--note keeps search button on last choice, no initial pick need to change searchcontroller-->
+                        <!--to compensate for no searchtype&ndash;&gt;-->
+
                 <label th:for="${column.key}" th:text="${column.value}"></label>
             </span>
 
@@ -37,6 +46,8 @@
     <hr />
 
     <!-- TODO #2 - Loop over jobs map to display all job fields -->
+
+    <div th:replace="fragments :: display-table"></div>
 
 </div>
 
