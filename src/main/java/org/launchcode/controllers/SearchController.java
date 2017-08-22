@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.MissingFormatWidthException;
 
 import static org.launchcode.models.JobData.findByColumnAndValue;
 
@@ -34,8 +35,8 @@ public class SearchController {
         ArrayList<HashMap<String, String>> jobs; // JobData.findByColumnAndValue("searchType", "searchTerm");
         //note use try throw catch to avoid Bad request when no searchType is selected?
 
-
-        if (searchType != null) {
+//
+        if (searchType.length() != 0) {
             if (searchType.equals("all")) {
                 jobs = JobData.findByValue(searchTerm);
             } else {
@@ -64,17 +65,22 @@ public class SearchController {
 
         /*
         try {
+            if (searchType == null) {
+                throw new MissingServletRequestParameterException();
+            }
+
             if (searchType.equals("all")) {
                 jobs = JobData.findByValue(searchTerm);
             } else {
                 jobs = JobData.findByColumnAndValue(searchType, searchTerm);
             }
         }
-        catch (MissingServletRequestParameterException) {
+        catch (MissingServletRequestParameterException e) {
             searchType = "all";
             jobs = JobData.findByValue(searchTerm);
         }
         */
+
 
 
         model.addAttribute("jobs", jobs);
